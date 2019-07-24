@@ -1,9 +1,11 @@
-const express = require('express')
-const app = express()
-var mongoose = require('mongoose');
-var Feed = require('./models/feed');
+const express = require('express');
+const cors = require('cors');
+const app = express();
+const mongoose = require('mongoose');
+const Feed = require('./models/feed');
+const bodyParser = require('body-parser');
 
-var bodyParser = require('body-parser');
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

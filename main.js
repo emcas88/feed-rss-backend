@@ -1,12 +1,11 @@
 const express = require('express')
 const app = express()
-const MongoClient = require('mongodb').MongoClient;
 var mongoose = require('mongoose');
 var Feed = require('./models/feed');
 
 var bodyParser = require('body-parser');
-app.use(bodyParser.json()); // support json encoded bodies
-app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const PORT = process.env.PORT || 3001;
 const MONGO_DB_PORT = process.env.MONGO_DB_PORT || 27017;

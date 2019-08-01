@@ -15,6 +15,8 @@ services:
       - mongo
     links:
       - mongo
+    environment:
+      MONGO_HOST: mongo
 
   mongo:
     privileged: true
@@ -28,7 +30,6 @@ services:
     environment:
       MONGO_ROOT_USERNAME: mongoadmin
       MONGO_ROOT_PASSWORD: secret
-      MONGO_HOST: mongo
 
   mongo-express:
     image: mongo-express

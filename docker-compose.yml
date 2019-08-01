@@ -1,0 +1,39 @@
+version: '3.3'
+
+services:
+
+  backend:
+    privileged: true
+    network_mode: bridge
+    container_name: 'feedrss-backend'
+    build: .
+    ports:
+      - "3001:3001"
+    expose:
+      - "3001"
+    depends_on:
+      - mongo
+    links:
+      - mongo
+
+  mongo:
+    privileged: true
+    network_mode: bridge
+    image: mongo
+    container_name: feedrss-mongodb
+    ports:
+      - "27017:27017"
+    expose:
+      - "27017"
+    environment:
+      MONGO_ROOT_USERNAME: mongoadmin
+      MONGO_ROOT_PASSWORD: secret
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example

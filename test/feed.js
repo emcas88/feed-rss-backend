@@ -65,7 +65,7 @@ describe('Feeds', () => {
 
             let feedPayload = {
                 url: "url"
-            }
+            };
 
             chai.request(server)
                 .post('/feeds')

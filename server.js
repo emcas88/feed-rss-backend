@@ -11,21 +11,32 @@ app.use(bodyParser.urlencoded({ extended: true }));
 let feedsRoute = require('./routes/feed');
 
 const PORT = process.env.PORT || 3001;
-const MONGO_DB_PORT = process.env.MONGO_DB_PORT || 27017;
-const MONGO_ROOT_USERNAME = encodeURIComponent(process.env.MONGO_ROOT_USERNAME || 'mongoadmin');
-const MONGO_ROOT_PASSWORD = encodeURIComponent(process.env.MONGO_ROOT_PASSWORD || 'secret');
 
-let options = { 
-    server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } }, 
-    replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } } 
-  }; 
+const options = {
+  autoIndex: false,
+  reconnectTries: 30,
+  reconnectInterval: 500, 
+  poolSize: 10,
+  bufferMaxEntries: 0
+}
 
-mongoose.connect(`mongodb://${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@localhost:${MONGO_DB_PORT}/?authMechanism=DEFAULT`, options);
+const connectWithRetry = () => {
+  console.log('MongoDB connection with retry');
+  
+  mongoose.connect("mongodb://mongo:27017/test", options).then(() => {
+    console.log('MongoDB is connected');
+  }).catch(err => {
+    console.log(err);
+    console.log('MongoDB connection unsuccessful, retry after 5 seconds.');
+    setTimeout(connectWithRetry, 5000);
+  });
+}
+
+connectWithRetry();
 
 app.route("/feeds")
     .get(feedsRoute.getFeeds)
     .post(feedsRoute.postFeed);
-
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}!`));
 

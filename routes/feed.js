@@ -1,6 +1,4 @@
-let mongoose = require('mongoose');
 let Feed = require('../models/feed');
-
 
 function getFeeds(req, res) {
 

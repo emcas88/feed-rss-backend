@@ -11,6 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 let feedsRoute = require('./routes/feed');
 
 const PORT = process.env.PORT || 3001;
+const MONGO_HOST = process.env.MONGO_HOST || '127.0.0.1'
 
 const options = {
   autoIndex: false,
@@ -23,7 +24,7 @@ const options = {
 const connectWithRetry = () => {
   console.log('MongoDB connection with retry');
   
-  mongoose.connect("mongodb://mongo:27017/test", options).then(() => {
+  mongoose.connect(`mongodb://${MONGO_HOST}:27017/test`, options).then(() => {
     console.log('MongoDB is connected');
   }).catch(err => {
     console.log(err);

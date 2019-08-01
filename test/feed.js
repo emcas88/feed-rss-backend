@@ -9,10 +9,11 @@ let should = chai.should();
 chai.use(chaiHttp);
 
 describe('Feeds', () => {
+
     beforeEach('beforeEach', (done) => {
         Feed.remove({}, (err) => { 
            done();
-        });        
+        });
     });
 
     describe('/GET', () => {

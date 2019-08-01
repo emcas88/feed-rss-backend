@@ -1,7 +1,7 @@
 FROM node
     
 WORKDIR /app
-COPY . ./
+# COPY . ./
 RUN npm install
 
 ENTRYPOINT [ "npm", "start" ]

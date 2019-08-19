@@ -17,6 +17,9 @@ services:
       - mongo
     environment:
       MONGO_HOST: mongo
+    volumes:
+      - ./:/app
+
 
   mongo:
     privileged: true

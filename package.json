@@ -17,7 +17,7 @@
     "express": "^4.17.1",
     "mocha": "^2.4.5",
     "mongodb": "^3.3.0-beta2",
-    "mongoose": "^5.6.7",
+    "mongoose": "^5.7.5",
     "promise-retry": "^1.1.1"
   }
 }

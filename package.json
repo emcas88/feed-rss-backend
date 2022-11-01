@@ -15,7 +15,7 @@
     "chai-http": "^2.0.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "mocha": "^2.4.5",
+    "mocha": "^10.1.0",
     "mongodb": "^3.3.0-beta2",
     "mongoose": "^5.6.7",
     "promise-retry": "^1.1.1"
